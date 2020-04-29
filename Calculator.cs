@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace LineCalculator
 {
@@ -48,6 +49,13 @@ namespace LineCalculator
         
         public void ParseLine(string line)
         {
+            if (!AreBracketsEven(line))
+            {
+                resultOk = false;
+                errorMessage = "Brackets are not even";
+                return;
+            }
+            
             string num = String.Empty;
             line = line.Replace(" ", "");
             //Console.WriteLine(line);
@@ -94,7 +102,6 @@ namespace LineCalculator
 
                     resultOk = false;
                     errorMessage = "You passed the wrong formatted line";
-                    Console.WriteLine(c);
                     break;
 
                 }
@@ -113,6 +120,14 @@ namespace LineCalculator
             }
             
             //Console.WriteLine(Operators.Count);
+        }
+
+        private bool AreBracketsEven(string line)
+        {
+            int openBracketsCount = line.Count(c => c == '(');
+            int closedBracketsCount = line.Count(c => c == ')');
+
+            return openBracketsCount == closedBracketsCount;
         }
 
         public float ParseNumber(string number)

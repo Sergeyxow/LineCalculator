@@ -1,7 +1,7 @@
 using LineCalculator;
 using NUnit.Framework;
 
-namespace UnitTests
+namespace UnitTestsr
 {
     public class CalculatorTests
     {
@@ -128,6 +128,38 @@ namespace UnitTests
             
             //assert
             Assert.AreEqual(10 / 13.5f, result);
+        }
+
+        [Test]
+        public void TestErrorMessageFormat()
+        {
+            //arrange
+            Calculator calculator = new Calculator();
+            string line = "45 / 3 * 85 - sdf";
+            string expectedMessage = "You passed the wrong formatted line";
+            string result;
+            
+            //act
+            result = calculator.Calculate(line).errorMessage;
+            
+            //assert
+            Assert.AreEqual(expectedMessage, result);
+        }
+        
+        [Test]
+        public void TestErrorBracketsAreNotEven()
+        {
+            //arrange
+            Calculator calculator = new Calculator();
+            string line = "10 + (( 5)";
+            string expectedMessage = "Brackets are not even";
+            string result;
+            
+            //act
+            result = calculator.Calculate(line).errorMessage;
+            
+            //assert
+            Assert.AreEqual(expectedMessage, result);
         }
     }
 }
