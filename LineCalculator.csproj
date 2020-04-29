@@ -6,7 +6,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="nunit" Version="3.12.0" />
+      <Compile Remove="UnitTests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="UnitTests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="UnitTests\**" />
     </ItemGroup>
 
 </Project>
