@@ -33,6 +33,23 @@ namespace UnitTests
             //assert
             Assert.AreEqual(expected, result);
         }
+        
+        [Test]
+        public void TestCalculateBrackets()
+        {
+            
+            //arrange
+            Calculator calculator = new Calculator();
+            string line = "2 * (3 + 4)";
+            float expected = 2 * (3 + 4);
+            float result;
+            
+            //act
+            result = calculator.Calculate(line).value;
+            
+            //assert
+            Assert.AreEqual(expected, result);
+        }
 
         [Test]
         public void TestParseNumber()

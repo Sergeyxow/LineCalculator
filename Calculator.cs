@@ -11,7 +11,9 @@ namespace LineCalculator
             {'+', 1},
             {'-', 1},
             {'*', 2},
-            {'/', 2}
+            {'/', 2},
+            {'(', 0},
+            {')', 3}
         };
 
         public Stack<float> Numbers = new Stack<float>();
@@ -70,9 +72,29 @@ namespace LineCalculator
                         PositionOperator(c);
                         continue;
                     }
+                    
+                    //Brackets
+                    
+                    if (c == '(')
+                    {
+                        Operators.Push(c);
+                        continue;
+                    }
+                    
+                    if (c == ')')
+                    {
+                        while (Operators.Peek() != '(')
+                        {
+                            Numbers.Push(CalculateTwoLastNumbers(Operators.Pop()));
+                        }
+
+                        Operators.Pop();
+                        continue;
+                    }
 
                     resultOk = false;
                     errorMessage = "You passed the wrong formatted line";
+                    Console.WriteLine(c);
                     break;
 
                 }
