@@ -28,7 +28,7 @@ namespace UnitTests
             float result;
             
             //act
-            result = calculator.Calculate(line);
+            result = calculator.Calculate(line).value;
             
             //assert
             Assert.AreEqual(expected, result);

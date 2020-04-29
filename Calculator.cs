@@ -16,12 +16,32 @@ namespace LineCalculator
 
         public Stack<float> Numbers = new Stack<float>();
         public Stack<char> Operators = new Stack<char>();
+        
+        
+        private float resultVal = 0f;
+        private bool resultOk = true;
+        private string errorMessage = String.Empty;
 
-        public float Calculate(string line)
+        public CalculationResult Calculate(string line)
         {
             ParseLine(line);
             //Console.WriteLine(Numbers.Count);
-            return Numbers.Pop();
+
+            if (resultOk) 
+                resultVal = Numbers.Pop();
+            else
+            {
+                resultVal = 0;
+            }
+
+            CalculationResult result = new CalculationResult
+            {
+                value = resultVal,
+                isOk = resultOk,
+                errorMessage = errorMessage
+            };
+
+            return result;
         }
         
         public void ParseLine(string line)
@@ -35,6 +55,7 @@ namespace LineCalculator
                 if (Char.IsDigit(c) || c == '.')
                 {
                     num += c;
+                    continue;
                 }
                 else
                 {
@@ -47,8 +68,13 @@ namespace LineCalculator
                     if (IsCharOperator(c))
                     {
                         PositionOperator(c);
+                        continue;
                     }
-                    
+
+                    resultOk = false;
+                    errorMessage = "You passed the wrong formatted line";
+                    break;
+
                 }
             }
 
@@ -115,7 +141,12 @@ namespace LineCalculator
         public float CalculateTwoLastNumbers(char op)
         {
             float last = Numbers.Pop();
-            float preLast = Numbers.Pop();
+            float preLast;
+
+            if (Numbers.Count > 0)
+                preLast = Numbers.Pop();
+            else
+                preLast = 0f;
 
             float result = 0;
             

@@ -15,6 +15,7 @@
     <e p="D:\Work\Coding\Projects\C#\LineCalculator" t="IncludeRecursive">
       <e p=".gitignore" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
+      <e p="CalculationResult.cs" t="Include" />
       <e p="Calculator.cs" t="Include" />
       <e p="LineCalculator.csproj" t="IncludeRecursive" />
       <e p="LineCalculator.sln" t="IncludeFlat" />
